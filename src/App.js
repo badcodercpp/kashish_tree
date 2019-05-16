@@ -6,6 +6,8 @@ import Tree from "./Kashish/index";
 
 import BplusTree from "./Kashish/b-plus/bPlusTree";
 
+import { T } from "./Kashish/chopra"
+
 let btree = new BplusTree(100);
 console.log(btree)
 
@@ -55,6 +57,10 @@ const f = {
 }
 console.log(t.find(f))
 
+console.log("another b tree");
+T.insert({hi:"hi ajay"});
+T.insert({hello:"hi ajay how are you"});
+console.log(T);
 function App() {
   return (
     <div className="App">

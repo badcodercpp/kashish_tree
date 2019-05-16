@@ -3,6 +3,7 @@ import { CONFIG } from "./innerConfig/index";
 
 import BplusTree from "./b-plus/bPlusTree";
 
+
 function Tree(socket, config, capacity = 100000){
     if (!validateConfig(config)) {
         throw new Error("invalid config format")
