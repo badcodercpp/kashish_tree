@@ -90,8 +90,57 @@ Tree.prototype.iterator = function(value, index){
     return null
 }
 
-Tree.prototype.find = function(selector){
-    //this.BplusTree.node.data
+Tree.prototype.findSingleByText = function(selector){
+    const data = this.BplusTree.node.data;
+    const tree = {
+        BplusTree: this.BplusTree
+    };
+    for (const i of data) {
+        for (const a of Object.keys(i)) {
+            if (typeof i[a] === "string") {
+                if (i[a].toString().toUpperCase().indexOf(selector.toString().toUpperCase())>-1) {
+                    tree["target"] = i;
+                    break;
+                }
+            }
+        }
+        if (tree["target"]) {
+            break;
+        }
+    }
+    return tree;
+}
+
+Tree.prototype.findMultipleByText = function(selector){
+    const data = this.BplusTree.node.data;
+    const tree = {
+        BplusTree: this.BplusTree,
+        target:[]
+    };
+    for (const i of data) {
+        for (const a of Object.keys(i)) {
+            if (typeof i[a] === "string") {
+                if (i[a].toUpperCase().indexOf(selector.toString().toUpperCase())>-1) {
+                    tree["target"].push(i)
+                }
+            }
+        }
+    }
+    return tree;
+}
+
+Tree.prototype.find = function(...args){
+    let customCheck = false, customTypeIndicator = "";
+    for (const i of args) {
+        if(!(typeof i === "object")){
+            customCheck = true;
+            customTypeIndicator = typeof i
+        }
+    }
+    if (customCheck) {
+        throw new Error(`invalid arguments expected ${typeof {}} but got ${customTypeIndicator}`)
+    }
+    this.BplusTree.find.apply(this.BplusTree,args)
 }
 
 

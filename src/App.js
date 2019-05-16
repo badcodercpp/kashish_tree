@@ -38,8 +38,22 @@ const config = [
 let t = new Tree({}, config)
 console.log(t)
 console.log(t.getTree())
-
-
+console.log("tree traverse - find single node");
+console.log(t.findSingleByText("b"))
+console.log("tree traverse - find multiple node");
+console.log(t.findMultipleByText("b"))
+console.log("tree size");
+console.log(t.getTreeSize())
+console.log("tree traverse - custom algorithm");
+const f = {
+  ZIP: [
+    {
+      value:"560068",
+      name:"KORAMANGALA"
+    }
+  ]
+}
+console.log(t.find(f))
 
 function App() {
   return (
