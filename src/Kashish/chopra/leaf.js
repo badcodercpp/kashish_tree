@@ -10,45 +10,45 @@ leaf.prototype.isLeaf = function() {return true;};
 leaf.prototype.getItem = function (key,near) {
     const vals = this.keyval;
 	if (near) {
-		for (var i=0, len=vals.length; i<len; i++) {
+		for (let i=0, len=vals.length; i<len; i++) {
 			if (key <= vals[i]) return i;
 		}
 	} else {
-		for (var i=0, len=vals.length; i<len; i++) {
+		for (let i=0, len=vals.length; i<len; i++) {
 			if (key === vals[i]) return i;
 		}
 	}
 	return -1;
 };
 
-leaf.prototype.XgetItem = function (key,near) {		// Binary chop version not used
-	var vals = this.keyval;
-	var L=0, M, R=vals.length-1;
-	if (key > vals[R])
-		return -1;
-	else if (key <= vals[L])
-		M = 0;
-	else {
-		while (true) {
-			M = Math.floor((R-L)/2);
-			if (M === 0) {
-				M = R;
-				break;
-			}
-			M += L;
-			if (key === vals[M]) break;
-			if (vals[M] > key) R = M;
-			else               L = M;
-		}
-	}
-	if (vals[M] != key && !near) return -1;
-	return M;
-};
+// leaf.prototype.XgetItem = function (key,near) {		// Binary chop version not used
+// 	var vals = this.keyval;
+// 	var L=0, M, R=vals.length-1;
+// 	if (key > vals[R])
+// 		return -1;
+// 	else if (key <= vals[L])
+// 		M = 0;
+// 	else {
+// 		while (true) {
+// 			M = Math.floor((R-L)/2);
+// 			if (M === 0) {
+// 				M = R;
+// 				break;
+// 			}
+// 			M += L;
+// 			if (key === vals[M]) break;
+// 			if (vals[M] > key) R = M;
+// 			else               L = M;
+// 		}
+// 	}
+// 	if (vals[M] != key && !near) return -1;
+// 	return M;
+// };
 
 leaf.prototype.addKey = function (key,rec) {
-	var vals = this.keyval;
-	var itm = vals.length;
-	for (var i=0, len=itm; i<len; i++) {
+	let vals = this.keyval;
+	let itm = vals.length;
+	for (let i=0, len=itm; i<len; i++) {
 		if (key === vals[i]) {
 			itm = -1;
 			break;
@@ -59,7 +59,7 @@ leaf.prototype.addKey = function (key,rec) {
 		}
 	}
 	if (itm != -1) {
-		for (var i=vals.length; i>itm; i--) {
+		for (let i=vals.length; i>itm; i--) {
 			vals[i] = vals[i-1];
 			this.recnum[i] = this.recnum[i-1];
 		}
